@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="hangman_words">
+        <item>kot</item>
+        <item>pies</item>
+        <item>samochód</item>
+        <item>krzesło</item>
+        <item>komputer</item>
+        <item>telewizor</item>
+        <item>telefon</item>
+        <item>książka</item>
+        <item>kawa</item>
+        <item>herbata</item>
+        <item>czekolada</item>
+        <item>kalendarz</item>
+    </string-array>
+</resources>

@@ -64,7 +64,13 @@ private fun UsedLettersText(usedLetters: String, modifier: Modifier){
             fontWeight = FontWeight.Bold,
             color = colorScheme.primary,
             modifier = Modifier.fillMaxWidth()
-
+        )
+        Text(
+            text = usedLetters.uppercase(),
+            textAlign = TextAlign.Left,
+            fontWeight = FontWeight.Bold,
+            color = colorScheme.primary,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }

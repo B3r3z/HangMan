@@ -76,7 +76,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 // GameStartButton composable function
                 val myWords = getMysteryWord(words = myArrayWords)
                 Log.d("MainActivity", "Mystery word: $myWords")
-
             }
         }
     }

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">HangMan</string>
     <string name="let_s_start">Let\'s start!</string>
-    <string name="used_letters">used letters</string>s
+    <string name="used_letters">used letters</string>
+    <string name="enter_letter">enter_letter</string>s
 </resources>

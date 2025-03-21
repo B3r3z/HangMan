@@ -78,14 +78,14 @@ private fun UsedLettersText(usedLetters: String, modifier: Modifier){
             textAlign = TextAlign.Left,
             fontWeight = FontWeight.Bold,
             color = colorScheme.primary,
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         )
         Text(
             text = usedLetters.uppercase(),
             textAlign = TextAlign.Left,
             fontWeight = FontWeight.Bold,
-            color = colorScheme.primary,
-            modifier = Modifier.fillMaxWidth()
+            color = colorScheme.error,
+            modifier = modifier.fillMaxWidth()
         )
     }
 }
@@ -96,7 +96,7 @@ fun LetterInputField(
     buttonEnabled: Boolean,
     isError: Boolean,
     onButtonClick: () -> Unit,
-modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
 
     var textFieldValue by remember {mutableStateOf("")}
@@ -167,7 +167,7 @@ fun GameLayout(
                 .padding(16.dp)
         )
         LetterInputField(
-            buttonText = stringResource(R.string.check),
+            buttonText = stringResource(R.string.check_letter),
             onButtonClick = {
             },
             isError = false,
@@ -189,5 +189,5 @@ fun GameLayout(
 )
 @Composable
 fun GameLayoutPreview(){
-    GameLayout(mysteryWord = "TEST WORD")
+    GameLayout(mysteryWord = "TEST")
 }

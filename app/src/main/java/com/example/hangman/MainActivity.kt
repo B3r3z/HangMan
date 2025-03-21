@@ -75,14 +75,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 // NOTE: This is the trailing lambda of the GameStartButton composable that is called
                 // when the button is clicked. Basically it's the onClick argument of the
                 // GameStartButton composable function
-                val myWords = getMysteryWord(words = myArrayWords)
-                Log.d("MainActivity", "Mystery word: $myWords")
+                val mysteryWord = getMysteryWord(words = myArrayWords)
+                Log.d("MainActivity", "Mystery word: $mysteryWord")
             }
             LetterInputField(
-                buttonText = stringResource(R.string.check),
+                buttonText = stringResource(R.string.check_letter),
+                buttonEnabled = true,
                 isError = false,
                 onButtonClick = {},
-                buttonEnabled = true,
                 modifier = Modifier
                     .padding(16.dp)
             )

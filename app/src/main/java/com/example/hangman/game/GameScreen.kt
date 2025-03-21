@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hangman.R
@@ -55,7 +56,6 @@ private fun GallowsImage(resId:Int, modifier: Modifier = Modifier, tint: Color =
 /*
 *composable fun that displays current state of the guessed word
  */
-
 @Composable
 private fun GuessWordText(word: String, modifier: Modifier=Modifier){
     Text(
@@ -73,7 +73,8 @@ private fun GuessWordText(word: String, modifier: Modifier=Modifier){
 private fun UsedLettersText(usedLetters: String, modifier: Modifier){
     Column {
         Text(
-            text= stringResource(R.string.used_letters),
+            //text= stringResource(R.string.used_letters),
+            text = stringResource(R.string.used_letters),
             textAlign = TextAlign.Left,
             fontWeight = FontWeight.Bold,
             color = colorScheme.primary,
@@ -152,14 +153,18 @@ fun GameLayout(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.padding(16.dp).fillMaxSize(),
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
         GallowsImage(resId = R.drawable.hangman0, tint = colorScheme.primary)
         GuessWordText(
             word = "____",
-            modifier = Modifier.fillMaxWidth().padding(16.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         )
         LetterInputField(
             buttonText = stringResource(R.string.check),
@@ -170,7 +175,19 @@ fun GameLayout(
         )
         UsedLettersText(
             usedLetters = "",
-            modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .fillMaxWidth()
         )
     }
+}
+
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    device  = "id:pixel_8_pro"
+)
+@Composable
+fun GameLayoutPreview(){
+    GameLayout(mysteryWord = "TEST WORD")
 }

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hangman.game.LetterInputField
 import com.example.hangman.ui.theme.HangManTheme
 
 class MainActivity : ComponentActivity() {
@@ -77,6 +78,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 val myWords = getMysteryWord(words = myArrayWords)
                 Log.d("MainActivity", "Mystery word: $myWords")
             }
+            LetterInputField(
+                buttonText = stringResource(R.string.check),
+                isError = false,
+                onButtonClick = {},
+                buttonEnabled = true,
+                modifier = Modifier
+                    .padding(16.dp)
+            )
         }
     }
 }

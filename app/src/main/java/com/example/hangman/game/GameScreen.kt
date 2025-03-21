@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ColorScheme
@@ -22,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
@@ -108,9 +110,9 @@ modifier: Modifier = Modifier,
         TextField(
 // The value of the TextField. The label is displayed when the value
 // is empty and not in focus.
-            value = "",
+            value = textFieldValue,
 // The callback that is called when the value changes.
-            onValueChange = { },
+            onValueChange = { textFieldValue = it}, // 'it' is for lambda fun
             singleLine = true,
             // The shape can be modified.
             shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp),
@@ -133,5 +135,42 @@ modifier: Modifier = Modifier,
         ) {
             Text(text = buttonText)
         }
+    }
+}
+
+
+/**
+ * Composable function that displays the game layout.
+ * Combines all of the game related composable functions.
+ * @param mysteryWord The word to be guessed.
+ * It is used to notify the parent composable that the game has ended.
+ * @param modifier The modifier to apply to the composable.
+ */
+@Composable
+fun GameLayout(
+    mysteryWord: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.padding(16.dp).fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
+    ) {
+        GallowsImage(resId = R.drawable.hangman0, tint = colorScheme.primary)
+        GuessWordText(
+            word = "____",
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
+        )
+        LetterInputField(
+            buttonText = stringResource(R.string.check),
+            onButtonClick = {
+            },
+            isError = false,
+            buttonEnabled = true
+        )
+        UsedLettersText(
+            usedLetters = "",
+            modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
+        )
     }
 }

@@ -158,29 +158,43 @@ fun GameLayout(
     mysteryWord: String,
     modifier: Modifier = Modifier
 ) {
+    // The inputLetter is a mutable state that holds the value of the TextField.
+    // It is lifted outside of the LetterInputField composable to maintain its state.
+    // This is so called state hoisting.
+    var inputLetter by remember { mutableStateOf("") }
+    var isErrorState by remember { mutableStateOf(false) }
+    // The game is a Game object that holds the game state and logic.
+    val game = remember { Game(mysteryWord) }
     Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .padding(16.dp)
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        GallowsImage(resId = R.drawable.hangman0, tint = colorScheme.primary)
+        GallowsImage(resId = game.getGallowsDrawableId(), tint = colorScheme.primary)
         GuessWordText(
-            word = "____",
+            word = game.getGuessWord(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         )
         LetterInputField(
+            textFieldValue = inputLetter,
             buttonText = stringResource(R.string.check_letter),
             onButtonClick = {
+                game.checkLetter(inputLetter)
+                inputLetter=""
+            },
+            onValueChange = {
+                //When the user enters the valu its converdet to uppercase and stored in the inputLetter
+                inputLetter = it.uppercase()
             },
             isError = false,
             buttonEnabled = true
         )
         UsedLettersText(
-            usedLetters = "",
+            usedLetters = game.getUsedLetters(),
             modifier = Modifier
                 .padding(top = 16.dp)
                 .fillMaxWidth()

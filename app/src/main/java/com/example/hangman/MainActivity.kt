@@ -67,26 +67,26 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 .padding(innerPadding)
                 .fillMaxSize() // Fill the whole screen
         ) {
-            GameStartButton(
-                text = stringResource(R.string.let_s_start),
-                enabled = true,
-                textColor = colorScheme.primary,
-            ) {
-                // NOTE: This is the trailing lambda of the GameStartButton composable that is called
-                // when the button is clicked. Basically it's the onClick argument of the
-                // GameStartButton composable function
-                val mysteryWord = getMysteryWord(words = myArrayWords)
-                Log.d("MainActivity", "Mystery word: $mysteryWord")
-            }
-            LetterInputField(
-                buttonText = stringResource(R.string.check_letter),
-                buttonEnabled = true,
-                isError = false,
-                onButtonClick = {},
-                modifier = Modifier
-                    .padding(16.dp)
-            )
         }
+        GameStartButton(
+            text = stringResource(R.string.let_s_start),
+            enabled = true,
+            textColor = colorScheme.primary,
+        ) {
+            // NOTE: This is the trailing lambda of the GameStartButton composable that is called
+            // when the button is clicked. Basically it's the onClick argument of the
+            // GameStartButton composable function
+            val mysteryWord = getMysteryWord(words = myArrayWords)
+            Log.d("MainActivity", "Mystery word: $mysteryWord")
+        }
+        LetterInputField(
+            buttonText = stringResource(R.string.check_letter),
+            buttonEnabled = true,
+            isError = false,
+            onButtonClick = {},
+            modifier = Modifier
+                .padding(16.dp)
+        )
     }
 }
 

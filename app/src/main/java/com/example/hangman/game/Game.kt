@@ -5,7 +5,7 @@ import com.example.hangman.R
 class Game(private val mysteryWord:String) {
     private var currentGallowsState =0 //state of gallows image, used to determine which image to display
     private var currentGallowsDrawableId= R.drawable.hangman0
-    private var gussWord = mysteryWord.replace(Regex("A-Z"), "_")
+    private var guessWord = mysteryWord.replace(Regex("A-Z"), "_")
     private var usedLetters =""
 
 

@@ -89,19 +89,26 @@ private fun UsedLettersText(usedLetters: String, modifier: Modifier){
         )
     }
 }
-
+/**
+ * A composable function that displays a TextField with a Button. Used to input letters.
+ * @param textFieldValue The value to e displayed in the TextField.
+ * @param buttonText The text to be displayed on the Button.
+ * @param buttonEnabled Whether the Button is enabled or not.
+ * @param isError Whether the TextField is in an error state or not.
+ * @param onButtonClick The callback to be called when the Button is clicked.
+ * @param onValueChange The callback to be called when the TextField value changes.
+ * @param modifier The modifier to apply to the Row composable.
+ */
 @Composable
 fun LetterInputField(
+    textFieldValue: String,
     buttonText: String,
     buttonEnabled: Boolean,
     isError: Boolean,
     onButtonClick: () -> Unit,
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
-    var textFieldValue by remember {mutableStateOf("")}
-    Log.d("LetterInputField", "textFieldValue: $textFieldValue")
-
     // The LetterInputField composable is a Row that contains a TextField and a Button.
     // The Row is a container that lays out its children in a horizontal line.
     Row(
@@ -109,11 +116,11 @@ fun LetterInputField(
         horizontalArrangement = Arrangement.Center, // The children are centered horizontally
     ) {
         TextField(
-// The value of the TextField. The label is displayed when the value
-// is empty and not in focus.
+            // The value of the TextField. The label is displayed when the value
+            // is empty and not in focus.
             value = textFieldValue,
-// The callback that is called when the value changes.
-            onValueChange = { textFieldValue = it}, // 'it' is for lambda fun
+            // The callback that is called when the value changes.
+            onValueChange = onValueChange,
             singleLine = true,
             // The shape can be modified.
             shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp),
@@ -138,7 +145,6 @@ fun LetterInputField(
         }
     }
 }
-
 
 /**
  * Composable function that displays the game layout.

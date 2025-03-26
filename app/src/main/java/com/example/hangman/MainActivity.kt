@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hangman.game.GameLayout
 import com.example.hangman.game.LetterInputField
 import com.example.hangman.ui.theme.HangManTheme
 
@@ -57,6 +58,7 @@ fun GameStartButton(text: String, enabled: Boolean, textColor: Color, modifier: 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
     val myArrayWords = stringArrayResource(id = R.array.hangman_words)
+    var mysteryWord =""
     // The Scaffold is a "canvas" for the screen. It provides a surface for the content.
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         // The Column is a composable that places its children in a vertical sequence.
@@ -76,16 +78,11 @@ fun MainScreen(modifier: Modifier = Modifier) {
             // NOTE: This is the trailing lambda of the GameStartButton composable that is called
             // when the button is clicked. Basically it's the onClick argument of the
             // GameStartButton composable function
-            val mysteryWord = getMysteryWord(words = myArrayWords)
+            mysteryWord = getMysteryWord(words = myArrayWords)
             Log.d("MainActivity", "Mystery word: $mysteryWord")
         }
-        LetterInputField(
-            buttonText = stringResource(R.string.check_letter),
-            buttonEnabled = true,
-            isError = false,
-            onButtonClick = {},
-            modifier = Modifier
-                .padding(16.dp)
+        GameLayout(
+            mysteryWord = mysteryWord,
         )
     }
 }

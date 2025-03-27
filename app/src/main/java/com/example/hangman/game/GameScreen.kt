@@ -2,9 +2,9 @@ package com.example.hangman.game
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-//import androidx.compose.foundation.layout.Arrangementimport
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +17,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,6 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hangman.R
+import com.example.hangman.ui.theme.HangManTheme
+
 
 @Composable
 private fun GallowsImage(resId: Int, modifier: Modifier = Modifier, tint: Color = Color.Black) {
@@ -39,7 +42,7 @@ private fun GallowsImage(resId: Int, modifier: Modifier = Modifier, tint: Color 
         painter = painterResource(id = resId),
         contentDescription = null,
         colorFilter = ColorFilter.tint(tint),
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxWidth().aspectRatio(1f)
     )
 }
 
@@ -84,13 +87,14 @@ fun LetterInputField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // Bez remember { mutableStateOf(...) }
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
         TextField(
             value = textFieldValue,
-            onValueChange = onValueChange,
+            onValueChange = onValueChange,  // wywołaj callback rodzica
             singleLine = true,
             shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp),
             label = { Text(text = stringResource(R.string.enter_letter)) },
@@ -124,21 +128,17 @@ fun GameLayout(
     val game = remember { Game(mysteryWord) }
     var guessWord by remember { mutableStateOf(game.guessWord) }
     var usedLetters by remember { mutableStateOf(game.usedLetters) }
-    var gallowsDrawableId by remember { mutableStateOf(game.currentGallowsDrawableId) }
+    var gallowsDrawableId by remember { mutableIntStateOf(game.currentGallowsDrawableId) }
 
     Column(
+        modifier = modifier.padding(16.dp).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .padding(16.dp)
-            .fillMaxSize(),
     ) {
         GallowsImage(resId = gallowsDrawableId, tint = colorScheme.primary)
         GuessWordText(
             word = guessWord,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier = Modifier.fillMaxWidth().padding(16.dp)
         )
         LetterInputField(
             textFieldValue = inputLetter,
@@ -165,13 +165,9 @@ fun GameLayout(
         )
         UsedLettersText(
             usedLetters = usedLetters,
-            modifier = Modifier
-                .padding(top = 16.dp)
-                .fillMaxWidth()
+            modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
         )
-        if (guessWord == mysteryWord || gallowsDrawableId == R.drawable.hangman9) {
-            onNewGame()
-        }
+
     }
 }
 
@@ -182,5 +178,8 @@ fun GameLayout(
 )
 @Composable
 fun GameLayoutPreview() {
-    GameLayout(mysteryWord = "TEST", onNewGame = {})
+    //GameLayout(mysteryWord = "TEST", onNewGame = {})
+    HangManTheme {
+        GameLayout(mysteryWord = "TEST", onNewGame = {})
+    }
 }

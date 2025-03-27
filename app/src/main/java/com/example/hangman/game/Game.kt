@@ -13,7 +13,7 @@ class Game(private var mysteryWord: String) {
 
     private fun getGallowsStateDrawable(): Int {
         return when (currentGallowsState) {
-            0 -> R.drawable.hangman0
+            0 -> R.drawable.hangman1
             1 -> R.drawable.hangman1
             2 -> R.drawable.hangman2
             3 -> R.drawable.hangman3

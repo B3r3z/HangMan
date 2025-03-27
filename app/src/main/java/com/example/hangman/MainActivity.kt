@@ -17,7 +17,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-//import androidx.compose.runtime.rememberimport androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,7 +48,8 @@ fun GameStartButton(
     enabled: Boolean,
     textColor: Color,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit) {
+    onClick: () -> Unit
+) {
     TextButton(onClick = onClick, enabled = enabled) {
         Text(
             text = text,
@@ -86,7 +86,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     mysteryWord = getMysteryWord(myArrayWords)
                     gameStarted = true
                 }
-            } else {
+            }
+            if (gameStarted) {
                 GameLayout(
                     mysteryWord = mysteryWord,
                     onNewGame = {

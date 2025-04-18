@@ -121,7 +121,8 @@ fun LetterInputField(
 fun GameLayout(
     mysteryWord: String,
     modifier: Modifier = Modifier,
-    onNewGame: () -> Unit
+    //onNewGame: () -> Unit
+    onEnd:(GameStatus) ->Unit
 ) {
     var inputLetter by remember { mutableStateOf("") }
     var isErrorState by remember { mutableStateOf(false) }
@@ -150,6 +151,11 @@ fun GameLayout(
                     usedLetters = game.usedLetters
                     gallowsDrawableId = game.currentGallowsDrawableId
                     inputLetter = ""
+
+                    // check if the game is finished
+                    if(game.isGameFinished()){
+                        onEnd(game.getGameStatus())
+                    }
                 }
             },
             onValueChange = {
@@ -180,6 +186,6 @@ fun GameLayout(
 fun GameLayoutPreview() {
     //GameLayout(mysteryWord = "TEST", onNewGame = {})
     HangManTheme {
-        GameLayout(mysteryWord = "TEST", onNewGame = {})
+        GameLayout(mysteryWord = "TEST", onEnd = {})
     }
 }

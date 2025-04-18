@@ -4,4 +4,9 @@
     <string name="used_letters">used letters</string>
     <string name="enter_letter">enter letter</string>
     <string name="check_letter">check letter</string>
+    <string name="start_text" />
+    <string name="you_won"><![CDATA[<string name=\"you_win\">You win!</string>\n<string name=\"you_lose\">You lose!</string>\n<string name=\"mystery_word_was\">The word was: %1$s</string>\n<string name=\"play_again\">Play Again</string>]]></string>
+    <string name="you_lost">you lost</string>
+    <string name="mystery_word_was">The word was: %1$s</string>
+    <string name="play_again">Play again</string>
 </resources>

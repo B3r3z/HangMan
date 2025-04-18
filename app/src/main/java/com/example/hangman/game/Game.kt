@@ -52,7 +52,24 @@ class Game(private var mysteryWord: String) {
             currentGallowsDrawableId = getGallowsStateDrawable()
         }
     }
-
+    private fun isGameWon():Boolean{
+        //The game is won when the guess wrod is equal to the mystery word
+        return guessWord == mysteryWord
+    }
+    private fun isGameLost():Boolean{
+        //The game is lost when the current gallows state is equal to 9
+        return currentGallowsState == 9
+    }
+    fun isGameFinished():Boolean{
+        return isGameWon() || isGameLost()
+    }
+    fun getGameStatus():GameStatus{
+        return when{
+            isGameWon() -> GameStatus.FINISHED_WON
+            isGameLost() -> GameStatus.FINISHED_LOST
+            else -> GameStatus.STARTED
+        }
+    }
     fun resetGame(newMysteryWord: String) {
         mysteryWord = newMysteryWord
         currentGallowsState = 0
@@ -60,4 +77,11 @@ class Game(private var mysteryWord: String) {
         guessWord = mysteryWord.replace(Regex("[A-Z]"), "_")
         usedLetters = ""
     }
+}
+
+/**
+ * Enum class representing the state of the game.
+ */
+enum class GameStatus {
+    NOT_STARTED, STARTED, FINISHED_WON, FINISHED_LOST
 }
